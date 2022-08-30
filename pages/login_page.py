@@ -10,11 +10,15 @@ class LoginPage(BasePage):
     language_menu_button_xpath = "//div[contains(@class,'selectMenu')]"
     language_menu_icon_xpath = "//*[@d = 'M7 10l5 5 5-5z']"
     sign_in_button_xpath = "//*[@type='submit']"
-    username_e_mail_validation_span_xpath = "//*[text()='Please provide your username or your e-mail.']"
-    password_validation_span_xpath = "//*[text()='Please provide your password.']"
     expected_panel_title = "Scouts Panel"
     expected_title = "Scouts panel - sign in"
     login_url = ("https://scouts-test.futbolkolektyw.pl/login")
+    validation_span_xpath = "//form//div[1]/div[3]/span"
+    email_validation_text = "Please provide your username or your e-mail."
+    password_validation_text = "Please provide your password."
+    password_validation_fragment = "password"
+    valid_email = "user01@getnada.com"
+    valid_password = "Test-1234"
 
     def type_in_email(self, email):
         self.field_send_keys(self.login_field_xpath, email)
@@ -25,9 +29,19 @@ class LoginPage(BasePage):
     def click_on_the_sign_in_button(self):
         self.click_on_the_element(self.sign_in_button_xpath)
 
-    def title_of_page(self):
+    def title_of_login_page(self):
         assert self.get_page_title(self.login_url) == self.expected_title
 
     def assert_panel_title(self, expected_panel_title):
         assert_element_text(self.driver, self.scouts_panel_title_xpath, expected_panel_title)
 
+    def assert_email_validation_text(self, email_validation_text):
+        assert_element_text(self.driver, self.validation_span_xpath, email_validation_text)
+
+    def assert_password_validation_text(self, password_validation_text):
+        assert_element_text(self.driver, self.validation_span_xpath, self.password_validation_text)
+
+    def correct_login(self):
+        self.type_in_email(self.valid_email)
+        self.type_in_password(self.valid_password)
+        self.click_on_the_sign_in_button()

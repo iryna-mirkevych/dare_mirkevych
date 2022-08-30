@@ -16,10 +16,29 @@ class Dashboard(BasePage):
     last_created_report_link_xpath = "//following-sibling::a[3]"
     expected_title = "Scouts panel"
     dashboard_url = "https://scouts-test.futbolkolektyw.pl/"
+    players_page_title_xpath = "//title"
+    expected_players_page_title_start = "Players"
 
     def title_of_page(self):
-        time.sleep(5)
+        self.wait_for_element_to_be_clickable(self.players_button_xpath)
         assert self.get_page_title(self.dashboard_url) == self.expected_title
+
+    def click_add_player(self):
+        self.wait_for_element_to_be_clickable(self.add_player_link_xpath)
+        self.click_on_the_element(self.add_player_link_xpath)
+
+    def click_players_button(self):
+        self.wait_for_element_to_be_clickable(self.players_button_xpath)
+        self.click_on_the_element(self.players_button_xpath)
+
+    def wait_for_presence_of_players_title_located(self):
+        self.wait_for_presence_of_element_located(self.players_page_title_xpath)
+
+    def check_title_of_players_page_starts_with(self):
+        actual_title = self.driver.title
+        assert actual_title.startswith(self.expected_players_page_title_start)
+
+
 
 
 pass
