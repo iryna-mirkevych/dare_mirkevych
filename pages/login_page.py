@@ -1,4 +1,4 @@
-from pages.base_page import BasePage, assert_element_text
+from pages.base_page import BasePage
 from selenium import webdriver
 
 
@@ -17,6 +17,7 @@ class LoginPage(BasePage):
     email_validation_text = "Please provide your username or your e-mail."
     password_validation_text = "Please provide your password."
     password_validation_fragment = "password"
+    #VALID LOGIN TEST DATA
     valid_email = "user01@getnada.com"
     valid_password = "Test-1234"
 
@@ -33,13 +34,13 @@ class LoginPage(BasePage):
         assert self.get_page_title(self.login_url) == self.expected_title
 
     def assert_panel_title(self, expected_panel_title):
-        assert_element_text(self.driver, self.scouts_panel_title_xpath, expected_panel_title)
+        self.assert_element_text(self.driver, self.scouts_panel_title_xpath, expected_panel_title)
 
     def assert_email_validation_text(self, email_validation_text):
-        assert_element_text(self.driver, self.validation_span_xpath, email_validation_text)
+        self.assert_element_text(self.driver, self.validation_span_xpath, email_validation_text)
 
     def assert_password_validation_text(self, password_validation_text):
-        assert_element_text(self.driver, self.validation_span_xpath, self.password_validation_text)
+        self.assert_element_text(self.driver, self.validation_span_xpath, self.password_validation_text)
 
     def correct_login(self):
         self.type_in_email(self.valid_email)

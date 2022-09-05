@@ -11,8 +11,8 @@ from utils.settings import DRIVER_PATH, IMPLICITLY_WAIT
 
 from pages.login_page import LoginPage
 from pages.base_page import BasePage
-from pages.base_page import assert_element_text
 from pages.dashboard import Dashboard
+from pages.edit_player_page import EditPlayerPage
 
 import time
 
@@ -34,7 +34,7 @@ class TestAddPlayer(unittest.TestCase):
         dashboard = Dashboard(self.driver)
         dashboard.title_of_page()
         add_player_link = Dashboard(self.driver)
-        add_player_link.click_add_player()
+        add_player_link.click_add_player_link()
         add_player_page = AddPlayerPage(self.driver)
         add_player_page.assert_title_of_add_player_page()
         add_player_page.type_in_name("Ivan")
@@ -44,8 +44,8 @@ class TestAddPlayer(unittest.TestCase):
         add_player_page.click_on_the_submit_button()
         # checking that the edit player page opens successfully
         # we wait for the page to load
-        time.sleep(7)
         edit_player_page = EditPlayerPage(self.driver)
+        edit_player_page.wait_for_presence_of_edit_page_title_located() #time.sleep(7)
         edit_player_page.check_title_starts_with()
         time.sleep(3)
 

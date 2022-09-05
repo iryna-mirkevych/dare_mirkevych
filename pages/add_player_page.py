@@ -1,4 +1,4 @@
-from pages.base_page import BasePage, assert_element_text
+from pages.base_page import BasePage
 
 
 class AddPlayerPage(BasePage):
@@ -21,7 +21,7 @@ class AddPlayerPage(BasePage):
         self.click_on_the_element(self.submit_button_xpath)
 
     def assert_empty_name_validation(self, empty_name_validation_text):
-        assert_element_text(self.driver, self.empty_name_validation_xpath, empty_name_validation_text)
+        self.assert_element_text(self.driver, self.empty_name_validation_xpath, empty_name_validation_text)
 
     def type_in_name(self, name):
         self.field_send_keys(self.name_field_xpath, name)
@@ -34,6 +34,8 @@ class AddPlayerPage(BasePage):
 
     def type_in_main_position(self, main_position):
         self.field_send_keys(self.main_position_field_xpath, main_position)
+
+
 
 
 pass

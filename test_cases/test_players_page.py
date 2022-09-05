@@ -16,7 +16,7 @@ from pages.dashboard import Dashboard
 import time
 
 
-class TestOpenPlayer(unittest.TestCase):
+class TestPlayersPage(unittest.TestCase):
 
     @classmethod
     def setUp(self):
@@ -41,6 +41,21 @@ class TestOpenPlayer(unittest.TestCase):
         time.sleep(3)
         player = EditPlayerPage(self.driver)
         player.check_title_starts_with()
+
+    def test_sort(self):
+        user_login = LoginPage(self.driver)
+        user_login.correct_login()
+        dashboard = Dashboard(self.driver)
+        dashboard.title_of_page()
+        players_button = Dashboard(self.driver)
+        players_button.click_players_button()
+        players_button.wait_for_presence_of_players_title_located()
+        players_button.check_title_of_players_page_starts_with()
+        players_page = PlayersPage(self.driver)
+        players_page.click_sort_button()
+        players_page.click_reports_input()
+        players_page.check_reports_column_not_present()
+
 
     @classmethod
     def tearDown(self):

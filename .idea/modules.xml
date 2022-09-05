@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/PycharmProjects/mirkevych_robotframework/.idea/mirkevych_robotframework.iml" filepath="$USER_HOME$/PycharmProjects/mirkevych_robotframework/.idea/mirkevych_robotframework.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/pythonProject1.iml" filepath="$PROJECT_DIR$/.idea/pythonProject1.iml" />
     </modules>
   </component>

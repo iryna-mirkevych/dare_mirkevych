@@ -14,7 +14,7 @@ from pages.dashboard import Dashboard
 import time
 
 
-class TestDashboardButtons(unittest.TestCase):
+class TestDashboard(unittest.TestCase):
 
     @classmethod
     def setUp(self):
