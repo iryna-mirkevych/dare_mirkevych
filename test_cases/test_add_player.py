@@ -23,7 +23,7 @@ class TestAddPlayer(unittest.TestCase):
     def setUp(self):
         os.chmod(DRIVER_PATH, 755)
         self.driver = webdriver.Chrome(executable_path=DRIVER_PATH)
-        self.driver.get('https://scouts-test.futbolkolektyw.pl/en')
+        self.driver.get('https://scouts.futbolkolektyw.pl/en')
         self.driver.fullscreen_window()
         self.driver.implicitly_wait(IMPLICITLY_WAIT)
 
@@ -39,14 +39,35 @@ class TestAddPlayer(unittest.TestCase):
         add_player_page.assert_title_of_add_player_page()
         add_player_page.type_in_name("Ivan")
         add_player_page.type_in_surname("Ivanenko")
+        add_player_page.type_in_age("12.12.2002")
+        add_player_page.type_in_main_position("goalkeeper")
+        #new obligatory field had been added
+        add_player_page.type_in_previous_club("Dynamo")
+        add_player_page.click_on_the_submit_button()
+        time.sleep(3)
+        edit_player_page = EditPlayerPage(self.driver)
+        #edit_player_page.wait_for_presence_of_edit_page_title_located() #time.sleep(7)
+        edit_player_page.check_title_starts_with()
+        time.sleep(3)
+
+    def test_add_player_non_valid_age(self): #AssertionError expected (Add page is expected, not Edit page)
+        user_login = LoginPage(self.driver)
+        user_login.correct_login()
+        dashboard = Dashboard(self.driver)
+        dashboard.title_of_page()
+        add_player_link = Dashboard(self.driver)
+        add_player_link.click_add_player_link()
+        add_player_page = AddPlayerPage(self.driver)
+        add_player_page.assert_title_of_add_player_page()
+        add_player_page.type_in_name("Ivan")
+        add_player_page.type_in_surname("Ivanenko")
         add_player_page.type_in_age("12.12.2022")
         add_player_page.type_in_main_position("goalkeeper")
+        # new obligatory field had been added
+        add_player_page.type_in_previous_club("Dynamo")
         add_player_page.click_on_the_submit_button()
-        # checking that the edit player page opens successfully
-        # we wait for the page to load
-        edit_player_page = EditPlayerPage(self.driver)
-        edit_player_page.wait_for_presence_of_edit_page_title_located() #time.sleep(7)
-        edit_player_page.check_title_starts_with()
+        time.sleep(10)
+        add_player_page.assert_header_of_add_player_page("Add player")
         time.sleep(3)
 
     @classmethod

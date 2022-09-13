@@ -2,7 +2,7 @@ import unittest
 
 from unittest.loader import makeSuite
 
-from test_cases.login_to_the_system import TestLoginPage
+from test_cases.test_login import TestLoginPage
 from test_cases.test_add_player import TestAddPlayer
 from test_cases.test_dashboard import TestDashboard
 from test_cases.test_players_page import TestPlayersPage

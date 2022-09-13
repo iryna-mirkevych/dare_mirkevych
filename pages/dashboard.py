@@ -14,10 +14,16 @@ class Dashboard(BasePage):
     last_created_player_link_xpath = "//descendant::a[3]"
     last_updated_player_link_xpath = "//descendant::a[4]"
     last_created_report_link_xpath = "//following-sibling::a[3]"
-    expected_title = "Scouts panel"
-    dashboard_url = "https://scouts-test.futbolkolektyw.pl/"
+    # Prod
+    expected_title = "PANEL SKAUTINGOWY" #changed to Polish name to run the other tests
+    #Test
+    #expected_title = "Scouts panel"
+    dashboard_url = "https://scouts.futbolkolektyw.pl/"
+    #Test
+    #dashboard_url = "https://scouts-test.futbolkolektyw.pl/"
     players_page_title_xpath = "//title"
     expected_players_page_title_start = "Players"
+    sign_out_button_xpath = "//div[1]//ul[2]/div[2]"
 
     def title_of_page(self):
         self.wait_for_element_to_be_clickable(self.players_button_xpath)
@@ -38,7 +44,8 @@ class Dashboard(BasePage):
         actual_title = self.driver.title
         assert actual_title.startswith(self.expected_players_page_title_start)
 
-
+    def click_on_the_sign_out_button(self):
+        self.click_on_the_element(self.sign_out_button_xpath)
 
 
 pass
